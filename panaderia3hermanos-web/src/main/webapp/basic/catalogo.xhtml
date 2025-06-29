@@ -1,17 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core"
->
-<h:head>
-   <title>Nuestro catalogo</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   <h:outputStylesheet name="estilos.css" library="css" />
-</h:head>
-<h:body>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="jakarta.faces.html">
+<ui:composition >
 
-</h:body>
+   <!-- Sobrescribe los bloques definidos en la plantilla -->
+   <ui:define name="title">
+      Catalogo
+   </ui:define>
 
+   <ui:define name="contenido">
+      <div class="contenido-principal-catalogo">
+         <h1>Catálogo de Productos</h1>
+         <h:panelGroup layout="block" styleClass="productos-grid">
+            <ui:repeat value="#{panaderiaBean.productos}" var="producto">
+               <div class="producto-card">
+                  <h:graphicImage value="#{producto.imagen}" alt="#{producto.nombre}"/>
+                  <h3>#{producto.nombre}</h3>
+                  <p>#{producto.descripcion}</p>
+                  <strong>$#{producto.precio}</strong>
+               </div>
+            </ui:repeat>
+         </h:panelGroup>
+      </div>
 
+   </ui:define>
+
+</ui:composition>
 </html>
