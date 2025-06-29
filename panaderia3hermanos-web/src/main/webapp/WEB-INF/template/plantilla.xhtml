@@ -1,23 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: adieller
-  Date: 28/06/25
-  Time: 15:59
--->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
 
 <h:head>
-    <title>Title</title>
+    <title><ui:insert name="title">Panaderia 3 Hermanos</ui:insert></title>
+    <h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
 </h:head>
-
 <h:body>
-
+    <div id="contenedor">
+        <ui:insert name="encabezado">
+            <ui:include src="/WEB-INF/template/encabezado.xhtml"></ui:include>
+        </ui:insert>
+        <div id="contenido">
+            <main>
+                <ui:insert name="contenido"/>
+            </main>
+        </div>
+        <ui:insert name="pie">
+            <ui:include src="/WEB-INF/template/pie.xhtml"></ui:include>
+        </ui:insert>
+    </div>
 </h:body>
 
 </html>

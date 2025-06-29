@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="jakarta.faces.core
-jakarta.faces.html ">
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
 <h:head>
-    <title>Hola mundo</title>
+    <title> Inicio Panadería 3 Hermanos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="estilos.css" library="css" />
 </h:head>
 <h:body>
-    <h1>Hola mundo</h1>
-</h:body>
+         <ui:insert name="cabecera">
+             <ui:include src="WEB-INF/template/plantilla.xhtml"/>
+         </ui:insert>
 
+
+</h:body>
 </html>
 

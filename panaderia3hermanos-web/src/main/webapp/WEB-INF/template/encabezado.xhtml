@@ -1,11 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:outputStylesheet library="css" name="estilos.css"/>
+            <nav class="nav-cabecera">
+                <h1>Panaderia 3 Hermanos</h1>
+                <ul>
+                    <li id="nav-palabras"><h:link value="CATÁLOGO" style="text-decoration: none; color:black" outcome="/basic/catalogo">
+
+                    </h:link> </li>
+                    <li>
+                        <h:link outcome="index" styleClass="navegacion-link">
+                            <h:graphicImage library="images" name="logoprincipal.jpeg" styleClass="navegacion-imagen" alt="No se pudo cargar la imagen"/>
+                        </h:link>
+                    </li>
+                    <li>
+                        <h:link outcome="index" styleClass="navegacion-link">
+                            <h:graphicImage library="images" name="inicio.png" styleClass="navegacion-imagen" alt="No se pudo cargar la imagen"/>
+                        </h:link>
+                    </li>
+                    <li>
+                        <h:link outcome="/basic/login" styleClass="navegacion-link">
+                            <h:graphicImage library="images" name="login.png" styleClass="navegacion-imagen" alt="No se pudo cargar la imagen"/>
+                        </h:link>
+                    </li>
+                </ul>
+            </nav>
+</ui:composition>
