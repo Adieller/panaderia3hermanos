@@ -16,7 +16,7 @@ public class MensajesController {
 
     public String enviar(){
         try{
-            if (password.equals("1234")){
+            if (password.equals("123456")){
                 return "/basic/salida/salida1";
             }else{
                 throw new Exception("Error en el password");

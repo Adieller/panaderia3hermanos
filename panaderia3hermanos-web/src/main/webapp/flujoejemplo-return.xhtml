@@ -1,13 +1,24 @@
-<ui:composition template="/WEB-INF/template/plantilla.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="jakarta.faces.html"
-                xmlns:f="jakarta.faces.core"
-                xmlns:ui="jakarta.faces.facelets">
-    <ui:param name="titulo" value="Pagina return de flujo"/>
-    <ui:define name="contenido">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>PI</title>
+    <h:outputStylesheet name="estiloform.css" library="css" />
+</h:head>
+
+<h:body
+        style="background-image: url('#{resource['img/img_7.png']}');
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;"
+        class="body">
+
+
         <h3>pagina de return del flujo</h3>
         <br/>
         <h:link value="Regreso al inicio" outcome="/basic/fotograma">
         </h:link>
-    </ui:define>
-</ui:composition>
+</h:body>
+</html>

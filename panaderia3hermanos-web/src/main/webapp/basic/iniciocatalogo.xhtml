@@ -13,7 +13,7 @@
 </h:head>
 <h:body>
     <ui:insert name="cabecera">
-        <ui:include src="WEB-INF/template/encabezado.xhtml"/>
+        <ui:include src="/template/encabezado.xhtml"/>
     </ui:insert>
     <div class="contenido-principal">
         <h1>¡Bienvenidos a Panadería 3 Hermanos!</h1>
@@ -23,7 +23,7 @@
         <h:panelGroup layout="block" styleClass="productos-container">
             <ui:repeat value="#{panaderiaBean.productos}" var="producto">
                 <div class="producto">
-                    <h:graphicImage value="#{producto.imagen}" alt="#{producto.nombre}" styleClass="producto-img"/>
+                    <h:graphicImage name="#{producto.imagen}" library="images" alt="#{producto.nombre}" styleClass="producto-img" />
                     <h3>#{producto.nombre}</h3>
                     <p>#{producto.descripcion}</p>
                     <strong>$#{producto.precio}</strong>
@@ -32,7 +32,7 @@
         </h:panelGroup>
     </div>
     <ui:insert name="pie">
-        <ui:include src="WEB-INF/template/pie.xhtml"/>
+        <ui:include src="/template/pie.xhtml"/>
     </ui:insert>
 
 
