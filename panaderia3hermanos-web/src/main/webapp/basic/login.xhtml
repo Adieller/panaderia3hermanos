@@ -5,7 +5,52 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+
+<h:head>
+    <title>Inicio de sesion</title>
+</h:head>
+
+<h:body>
+    <h1>Por favor ingrese sus datos</h1>
+    <p>Agregando mensajes a los diferentes componentes que lo requieren</p>
+
+    <h:form id="formSesion1">
+        <fieldset>
+            <legend>Datos</legend>
+            <section>
+                <h:outputText for="email" value="Correo Electronico:"/>
+                <h:inputText id="email" value="#{datosSesion.email}" required="true" />
+                <h:message for="email" id="msjEmail" />
+            </section>
+            <section>
+                <h:outputText for="pass" value="Contrasena: "/>
+                <h:inputSecret id="pass" value="#{datosSesion.password}" required="true" />
+                <h:message for="pass" id="msjPass" />
+            </section>
+
+            <footer>
+                <h:commandButton id="enviarBtn" value="Enviar" action="#{datosSesion.obtenerNombres()}">
+                    <f:ajax execute="@form" render="@all msjEnviar" />
+                </h:commandButton>
+                <h:message for="enviarBtn" id="msjEnviar"/>
+            </footer>
+            <h:form id="formSesion">
+                <h:panelGrid columns="1">
+                    <h:commandButton id="enviarBtn" value="Probar conexión" action="#{datosSesion.testConexion}" />
+                    <h:outputText value="#{datosSesion.mensaje}" style="margin-left:10px;" />
+                    <br/><br/>
+                    <h:dataTable value="#{datosSesion.obtenerNombres()}" var="nombre">
+                        <h:column>
+                            <f:facet name="header">Nombre</f:facet>
+                            #{nombre}
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGrid>
+            </h:form>
+        </fieldset>
+    </h:form>
+
+</h:body>
+
 </html>
+
