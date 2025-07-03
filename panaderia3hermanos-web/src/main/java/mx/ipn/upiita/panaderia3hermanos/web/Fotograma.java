@@ -43,6 +43,6 @@ public class Fotograma implements Serializable {
     }
 
     public String verPedido() {
-        return "index?faces-redirect=true";
+        return "comentarios?faces-redirect=true";
     }
 }

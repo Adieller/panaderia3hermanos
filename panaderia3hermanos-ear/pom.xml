@@ -2,7 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>mx.ipn.upiita.panaderia3hermanos</groupId>
         <artifactId>panaderia3hermanos</artifactId>
@@ -12,35 +14,31 @@
     <groupId>mx.ipn.upiita.panaderia3hermanos.ear</groupId>
     <artifactId>panaderia3hermanos-ear</artifactId>
     <packaging>ear</packaging>
-    <name>panaderia3hermanos-ear : EAR package</name>
-    <url>http://maven.apache.org</url>
+    <name>panaderia3hermanos-ear</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <wildfly.version>30.0.0.Final</wildfly.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-core-api</artifactId>
-            <version>10.0.0</version>
-        </dependency>
         <dependency>
             <groupId>mx.ipn.upiita.panaderia3hermanos.web</groupId>
             <artifactId>panaderia3hermanos-web</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
+
         <dependency>
             <groupId>mx.ipn.upiita.panaderia3hermanos.ejb</groupId>
             <artifactId>panaderia3hermanos-ejb</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
-            <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
@@ -53,11 +51,6 @@
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin-parent</artifactId>
-                <version>3.0.2.Final</version>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ear-plugin</artifactId>
                 <version>3.3.0</version>
@@ -69,20 +62,32 @@
                             <groupId>mx.ipn.upiita.panaderia3hermanos.web</groupId>
                             <artifactId>panaderia3hermanos-web</artifactId>
                             <contextRoot>/panaderia3hermanos-web</contextRoot>
-                            <bundleFileName>panaderia3hermanos-web.war</bundleFileName>
                         </webModule>
                         <ejbModule>
                             <groupId>mx.ipn.upiita.panaderia3hermanos.ejb</groupId>
                             <artifactId>panaderia3hermanos-ejb</artifactId>
-                            <bundleFileName>panaderia3hermanos-ejb.jar</bundleFileName>
                         </ejbModule>
                     </modules>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
+            </plugin>
+
+            <!-- Plugin correcto para despliegue a WildFly -->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>3.0.2.Final</version>
+                <configuration>
+                    <hostname>localhost</hostname>
+                    <port>9990</port>
+                    <username>admin</username>
+                    <password>admin</password>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,17 +1,76 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="jakarta.faces.html">
+<ui:composition template="/WEB-INF/template/plantilla.xhtml">
 
-<h:head>
+    <ui:define name="title">
+        Catalogo
+    </ui:define>
 
-    <title>Hola controller</title>
-</h:head>
+    <ui:define name="contenido">
+        <style>
+            .parent {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, auto);
+                grid-column-gap: 10px;
+                grid-row-gap: 10px;
+                padding: 20px;
+            }
 
+            .div1 { grid-area: 1 / 1 / 4 / 4; }
+            .div2 { grid-area: 1 / 4 / 4 / 6; }
+            .div3 { grid-area: 4 / 1 / 5 / 6; }
 
-<h:body>
+            video {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+        </style>
 
-    <h1>Hola mundo con Controller</h1>
-</h:body>
+        <div class="parent">
+            <!-- Texto principal -->
+            <div class="div1">
+                <h1 class="titulo-llamativo">🍞Bienvenidos a Panadería 3 Hermanos</h1>
+                <p>
+                    En Panadería 3 Hermanos, la tradición y el sabor se combinan para ofrecerte productos horneados de la más alta calidad.
+                    Somos un establecimiento reconocido en la comunidad por nuestra dedicación, frescura y atención personalizada.
+                    Ofrecemos servicio tanto al menudeo como al mayoreo, adaptándonos a las necesidades de cada cliente: desde quienes buscan
+                    disfrutar de un pan calientito en casa, hasta negocios que requieren surtirse con productos en volumen.
+                </p>
+
+                <h2>Nuestra variedad</h2>
+                <p>Elaboramos diariamente una amplia gama de productos, entre los que destacan:</p>
+                <ul>
+                    <li>Pan dulce tradicional</li>
+                    <li>Repostería artesanal</li>
+                    <li>Pan salado recién horneado</li>
+                </ul>
+                <p>Cada pieza es preparada con esmero, garantizando siempre frescura, sabor y calidad.</p>
+            </div>
+
+            <!-- Video -->
+            <div class="div2">
+                <video autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline">
+                    <source src="#{resource['imagen/encuesta.mp4']}" type="video/mp4"/>
+                    Tu navegador no soporta el video.
+                </video>
+            </div>
+
+            <!-- Pie o sección final -->
+            <div class="div3">
+                <h2>Sucursales y pedidos especiales</h2>
+                <p>
+                    Contamos con al menos dos sucursales, estratégicamente ubicadas para brindarte un servicio más cercano y eficiente.
+                    Además, ofrecemos un sistema de venta por pedido, permitiéndote reservar tus productos con mínimo un día de anticipación,
+                    asegurando así su disponibilidad y una mejor atención.
+                </p>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
 </html>

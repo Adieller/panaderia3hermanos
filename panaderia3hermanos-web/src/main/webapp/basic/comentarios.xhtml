@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="/WEB-INF/template/plantilla.xhtml">
+
+    <ui:define name="title">
+        Comentarios de Clientes
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h2>Comentarios de nuestros clientes</h2>
+
+        <h:dataTable value="#{comentarioBean.comentarios}" var="coment"
+                     styleClass="table table-striped" headerClass="table-header">
+
+            <h:column>
+                <f:facet name="header">Cliente</f:facet>
+                #{coment.clieNombre}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Comentario</f:facet>
+                #{coment.comentTexto}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Fecha</f:facet>
+                <h:outputText value="#{coment.comentFecha}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                </h:outputText>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+
+</ui:composition>
+</html>

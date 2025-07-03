@@ -6,13 +6,28 @@
       xmlns:ui="jakarta.faces.facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="jakarta.faces.core
 jakarta.faces.facelets ">
-
 <h:head>
     <title>
         <ui:insert name="title">Panaderia 3 Hermanos</ui:insert>
     </title>
-    <h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
+
+    <!-- ✅ Enlace a Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&amp;display=swap" rel="stylesheet"/>
+
+    <!-- ✅ Hoja de estilos ya existente -->
+    <h:outputStylesheet library="css" name="estilos.css"/>
+
+    <!-- ✅ Estilo interno adicional -->
+    <style>
+        .titulo-llamativo {
+            font-family: 'Lobster', cursive;
+            font-size: 2.5em;
+            color: #8B4513;
+            text-shadow: 1px 1px 2px #ddd;
+        }
+    </style>
 </h:head>
+
 <h:body>
     <div id="contenedor">
         <ui:insert name="encabezado">

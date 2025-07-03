@@ -1,10 +1,21 @@
-<ui:composition template="/WEB-INF/template/plantilla.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="jakarta.faces.html"
-                xmlns:f="jakarta.faces.core"
-                xmlns:ui="jakarta.faces.facelets">
-    <ui:param name="titulo" value="Pagina Final"/>
-    <ui:define name="contenido">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>P</title>
+    <h:outputStylesheet name="estiloform.css" library="css" />
+</h:head>
+
+<h:body
+        style="background-image: url('#{resource['img/img_7.png']}');
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;"
+        class="body">
+
+
         <h3>Pagina final del flujo</h3>
         <p>Presentando la pagina final del flujo</p>
         <h:form>
@@ -18,5 +29,5 @@
                 <f:ajax execute="@form" render="@form"/>
             </h:commandButton>
         </h:form>
-    </ui:define>
-</ui:composition>
+    </h:body>
+</html>
