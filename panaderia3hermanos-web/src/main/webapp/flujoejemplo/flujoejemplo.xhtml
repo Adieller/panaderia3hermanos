@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Pedido</title>
+    <h:outputStylesheet name="estiloform.css" library="css" />
+</h:head>
+
+<h:body
+        style="background-image: url('#{resource['img/img_7.png']}');
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;"
+        class="body">
+
+    <h:graphicImage name="img/img_8.png" styleClass="encabezado" />
+
+    <div style="text-align: center;">
+        <h1 class="subtexto frase">Elige mediante el id el producto que deseas</h1>
+        <br/>
+        <h:graphicImage name="img/img_7.png" alt="MDN" width="250px" height="200px" />
+        <br/>
+        <h:form>
+            <h:inputText id="texto1" value="#{flujoController.campoTexto1}"/>
+            <h:outputLabel for="texto1" value="Un Texto" />
+            <br/>
+
+            <h:commandButton value="Siguiente" action="paginaintermedia">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+        </h:form>
+    </div>
+</h:body>
+</html>

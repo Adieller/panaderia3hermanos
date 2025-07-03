@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="primefaces"
+>
+<h:head>
+    <title> Inicio Panadería 3 Hermanos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="estilos.css" library="css" />
+</h:head>
+<h:body>
+    <ui:insert name="cabecera">
+        <ui:include src="WEB-INF/template/encabezado.xhtml"/>
+    </ui:insert>
+    <div class="contenido-principal">
+        <h1>¡Bienvenidos a Panadería 3 Hermanos!</h1>
+        <p>Productos artesanales recién horneados todos los días.</p>
+
+        <h2>Productos destacados</h2>
+        <h:panelGroup layout="block" styleClass="productos-container">
+            <ui:repeat value="#{panaderiaBean.productos}" var="producto">
+                <div class="producto">
+                    <h:graphicImage value="#{producto.imagen}" alt="#{producto.nombre}" styleClass="producto-img"/>
+                    <h3>#{producto.nombre}</h3>
+                    <p>#{producto.descripcion}</p>
+                    <strong>$#{producto.precio}</strong>
+                </div>
+            </ui:repeat>
+        </h:panelGroup>
+    </div>
+    <ui:insert name="pie">
+        <ui:include src="WEB-INF/template/pie.xhtml"/>
+    </ui:insert>
+
+
+</h:body>
+</html>

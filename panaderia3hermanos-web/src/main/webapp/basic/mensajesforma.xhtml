@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Inicio</title>
+    <h:outputStylesheet name="estiloform.css" library="css" />
+</h:head>
+
+<h:body
+        style="background-image: url('#{resource['img/panaderia.png']}');
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;"
+        class="body">
+
+    <h:graphicImage name="img/img_2.png" styleClass="encabezado" />
+
+    <div style="text-align: center;">
+        <h:graphicImage name="img/img.png" alt="MDN" width="250px" height="200px" />
+        <br/>
+        <h1 class="subtexto frase">Inicia tu sesión</h1>
+        <p class="subtexto frase">Llena los campos correspondientes:</p>
+
+        <h:form id="formEtiquetaMensajes">
+            <fieldset>
+                <legend class="subtexto frase">Datos</legend>
+
+                <section class="subtexto frase">
+                    <h:outputText for="email" value="correo electronico"/>
+                    <h:inputText id="email" value="#{mensajesController.email}" required="true"/>
+                    <h:message for="email" id="msjEmail" errorClass="errorMsg"/>
+                </section>
+
+                <section class="subtexto frase">
+                    <h:outputText for="pass" value="contraseña"/>
+                    <h:inputSecret id="pass" value="#{mensajesController.password}" required="true"/>
+                    <h:message for="pass" id="msjPass" errorClass="errorMsg"/>
+                </section>
+
+                <footer>
+                    <h:commandButton id="enviarBtn" value="Enviar" action="#{mensajesController.enviar()}">
+                        <f:ajax execute="@form" render="@all msjEnviar"/>
+                    </h:commandButton>
+
+                    <h:message for="enviarBtn" id="msjEnviar" errorClass="errorMsg"/>
+                </footer>
+            </fieldset>
+        </h:form>
+    </div>
+</h:body>
+</html>

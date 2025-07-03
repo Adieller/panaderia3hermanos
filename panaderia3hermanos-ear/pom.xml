@@ -63,7 +63,7 @@
                 <version>3.3.0</version>
                 <configuration>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
-                    <outputDirectory>C:\Users\A\Documents\servidor\wildfly-36.0.0.Final\standalone\deployments</outputDirectory>
+                    <outputDirectory>${env.JBOSS_HOME}/standalone/deployments</outputDirectory>
                     <modules>
                         <webModule>
                             <groupId>mx.ipn.upiita.panaderia3hermanos.web</groupId>

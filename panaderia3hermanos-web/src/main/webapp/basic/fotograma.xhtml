@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Panadería</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="estilos1.css" library="css" />
+
+</h:head>
+
+<h:body
+        style="background-image: url('#{resource['img/img_5.png']}');
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;"
+        class="body">
+    <h:form >
+
+        <h:graphicImage name="img/img_4.png" styleClass="encabezado" />
+
+        <div class="subtexto frase">
+            Comienza el día con un aroma irresistible y una pieza de pan perfectamente preparada.
+        </div>
+
+        <div class="img-menu-wrapper , botones-navegacion">
+            <h:commandButton value="⬅" action="#{fotograma.anterior}" styleClass="boton-flecha" />
+            <h:commandLink action="#{fotograma.verDetalle}">
+                <h:graphicImage value="#{fotograma.imagenActual}" styleClass="img-menu" />
+            </h:commandLink>
+            <h:commandButton value="➡" action="#{fotograma.siguiente}" styleClass="boton-flecha" />
+        </div>
+
+
+        <div class="titulo">Menú</div>
+
+        <h:commandButton value="Comentarios" action="#{fotograma.verPedido}" styleClass="ver-pedido" />
+
+
+        <div class="frase">
+            <h:graphicImage name="img/pan.png" alt="MDN" width="200px" height="200px" class="photo" style="float: left; " />
+            No es que el café me dé insomnio, es que me hace soñar despierto.<br/> — Anónimo
+        </div>
+
+    </h:form>
+</h:body>
+</html>
+

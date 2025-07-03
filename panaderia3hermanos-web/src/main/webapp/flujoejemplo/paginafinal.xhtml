@@ -1,0 +1,22 @@
+<ui:composition template="/WEB-INF/template/plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+    <ui:param name="titulo" value="Pagina Final"/>
+    <ui:define name="contenido">
+        <h3>Pagina final del flujo</h3>
+        <p>Presentando la pagina final del flujo</p>
+        <h:form>
+            <h:inputText id="texto3" value="#{flujoController.campoTexto3}"/>
+            <h:outputLabel for="texto3" value="un Texto2"/>
+            <br/>
+            <h:commandButton value="Anterior" action="paginaintermedia">
+                <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+            <h:commandButton value="Enviar" action="flujoejemplo-return" actionListener="#{flujoController.submit}">
+                <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+        </h:form>
+    </ui:define>
+</ui:composition>
