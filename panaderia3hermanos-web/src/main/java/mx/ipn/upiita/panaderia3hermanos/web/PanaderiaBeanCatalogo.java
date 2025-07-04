@@ -1,29 +1,52 @@
 package mx.ipn.upiita.panaderia3hermanos.web;
-import mx.ipn.upiita.panaderia3hermanos.web.Producto;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
-@Named
+@Named("catalogoBean")
 @RequestScoped
 public class PanaderiaBeanCatalogo {
-    private List<Producto> productos;
 
-    public PanaderiaBeanCatalogo() {
-        productos = new ArrayList<>();
-        for (int i = 1; i <= 25; i++) {
-            productos.add(new Producto(
-                    "Producto " + i,
-                    "Delicioso producto de panadería artesanal número " + i,
-                    1.00 + i,
-                    "resources/images/producto" + i + ".jpg"
-            ));
-        }
+    private int productoId;
+    private String nombre;
+    private BigDecimal precio;
+    private int cantidad;
+
+
+// Este bean puede ser usado para mostrar productos en el catálogo
+    // o para agregar un producto al carrito (junto con CarritoBean)
+
+    public int getProductoId() {
+        return productoId;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public void setProductoId(int productoId) {
+        this.productoId = productoId;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

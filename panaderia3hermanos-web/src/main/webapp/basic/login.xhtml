@@ -12,43 +12,34 @@
 
 <h:body>
     <h1>Por favor ingrese sus datos</h1>
-    <p>Agregando mensajes a los diferentes componentes que lo requieren</p>
 
-    <h:form id="formSesion1">
+    <h:form id="formSesion">
         <fieldset>
             <legend>Datos</legend>
             <section>
                 <h:outputText for="email" value="Correo Electronico:"/>
-                <h:inputText id="email" value="#{datosSesion.email}" required="true" />
+                <h:inputText id="email" value="#{datosSesion.usuario}" required="true" />
                 <h:message for="email" id="msjEmail" />
             </section>
             <section>
                 <h:outputText for="pass" value="Contrasena: "/>
-                <h:inputSecret id="pass" value="#{datosSesion.password}" required="true" />
+                <h:inputSecret id="pass" value="#{datosSesion.contrasenia}" required="true" />
                 <h:message for="pass" id="msjPass" />
             </section>
 
             <footer>
-                <h:commandButton id="enviarBtn" value="Enviar" action="#{datosSesion.obtenerNombres()}">
-                    <f:ajax execute="@form" render="@all msjEnviar" />
+                <h:commandButton id="enviarBtn" value="Enviar" action="#{datosSesion.enviar()}">
+
                 </h:commandButton>
                 <h:message for="enviarBtn" id="msjEnviar"/>
             </footer>
-            <h:form id="formSesion">
-                <h:panelGrid columns="1">
-                    <h:commandButton id="enviarBtn" value="Probar conexión" action="#{datosSesion.testConexion}" />
-                    <h:outputText value="#{datosSesion.mensaje}" style="margin-left:10px;" />
-                    <br/><br/>
-                    <h:dataTable value="#{datosSesion.obtenerNombres()}" var="nombre">
-                        <h:column>
-                            <f:facet name="header">Nombre</f:facet>
-                            #{nombre}
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGrid>
-            </h:form>
         </fieldset>
     </h:form>
+
+    <h:form id="newRegistro">
+        <h:commandButton value="Registrarse" action="registro" />
+    </h:form>
+
 
 </h:body>
 

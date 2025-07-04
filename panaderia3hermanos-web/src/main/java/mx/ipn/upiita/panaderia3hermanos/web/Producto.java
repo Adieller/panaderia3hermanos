@@ -1,5 +1,7 @@
 package mx.ipn.upiita.panaderia3hermanos.web;
 
+import jakarta.faces.context.FacesContext;
+
 public class Producto {
     private String nombre;
     private String descripcion;
@@ -12,6 +14,7 @@ public class Producto {
         this.precio = precio;
         this.imagen = imagen;
     }
+
 
     // Getters y Setters
     public String getNombre() { return nombre; }

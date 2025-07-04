@@ -1,85 +1,105 @@
 package mx.ipn.upiita.panaderia3hermanos.web;
 
 import jakarta.annotation.Resource;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.ExternalContext;
 import jakarta.inject.Named;
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.enterprise.context.SessionScoped;
+import java.io.Serializable;
 
-@Named(value = "datosSesion")
-@RequestScoped
-public class InicioSesion {
+@SessionScoped
+@Named("datosSesion")
+public class InicioSesion implements Serializable {
 
     @Resource(lookup = "java:/MyAppDS")
     private DataSource ds;
 
-    private String email;
-    private String password;
-    private String mensaje;
+    private String usuario;
+    private String contrasenia;
+    private int usuarioId;
+    private String nombre;
+    private String rol;
 
-    public void testConexion() {
-        try (Connection conn = ds.getConnection()) {
-            mensaje = "Conectado a: " + conn.getMetaData().getDatabaseProductName();
-        } catch (Exception e) {
-            mensaje = "Error de conexión: " + e.getMessage();
-        }
-    }
 
-    public List<String> obtenerNombres() {
-        List<String> nombres = new ArrayList<>();
-        try (Connection conn = ds.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT ClieCorreo FROM Cliente");
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                nombres.add(rs.getString("ClieCorreo"));
-            }
-
-        } catch (Exception e) {
-            mensaje = "Error al consultar nombres: " + e.getMessage();
-        }
-        return nombres;
-    }
 
     public String enviar() {
-        try {
-            if ("1234".equals(password)) {
-                return "/basic/salida/salida1";
-            } else {
-                throw new Exception("Contraseña incorrecta");
+        try (Connection conn = ds.getConnection()) {
+            // Primero intentamos encontrar en Empleado
+            String sqlEmp = "SELECT EmpleTipo FROM Empleado WHERE EmpleUsuario = ? AND EmpleContrasenia = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sqlEmp)) {
+                stmt.setString(1, usuario);
+                stmt.setString(2, contrasenia);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    this.usuarioId = rs.getInt("EmpleID");
+                    this.nombre = rs.getString("EmpleNombre");
+                    this.rol = "Empleado";
+                    String tipo = rs.getString("EmpleTipo");
+                    return tipo.equals("Administrador") ? "admin?faces-redirect=true" : "vendedor?faces-redirect=true";
+                }
             }
+
+            // Si no es empleado, buscar en Cliente
+            String sqlCli = "SELECT ClieID FROM Cliente WHERE ClieUsuario = ? AND ClieContrasenia = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sqlCli)) {
+                stmt.setString(1, usuario);
+                stmt.setString(2, contrasenia);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                    ec.redirect(ec.getRequestContextPath() + "/index.xhtml");
+                    this.usuarioId = rs.getInt("ClieID");
+                    this.nombre = rs.getString("ClieNombre");
+                    this.rol = "Cliente"; // o "Administrador" /
+
+                }
+            }
+
+            // Si no se encontró en ningún lado
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Credenciales incorrectas", null));
+
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(
-                    "formSesion:enviarBtn",
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null)
-            );
-            return null;
+            e.printStackTrace(); // para depuración
         }
+
+        return null;
+    }
+    public String cerrarSesion() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true";
     }
 
-    // Getters y Setters
-
-    public String getPassword() {
-        return password;
+    // Getters y setters
+    public String getUsuario() { return usuario; }
+    public void setUsuario(String usuario) { this.usuario = usuario; }
+    public int getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public String getRol() {
+        return rol;
     }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getContrasenia() { return contrasenia; }
+    public void setContrasenia(String contrasenia) { this.contrasenia = contrasenia; }
 }

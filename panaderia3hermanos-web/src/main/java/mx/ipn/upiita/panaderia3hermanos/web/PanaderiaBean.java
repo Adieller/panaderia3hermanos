@@ -1,5 +1,6 @@
 package mx.ipn.upiita.panaderia3hermanos.web;
 
+import jakarta.faces.context.FacesContext;
 import mx.ipn.upiita.panaderia3hermanos.web.Producto;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
@@ -22,7 +23,10 @@ public class PanaderiaBean {
         productos.add(new Producto("Supremo de chocolate", "Masa tradicional de dona cubierta completamente con chocolate y granillo de chocolate semi amargo.", 360, "resources/images/supremochocolate.jpg"));
         productos.add(new Producto("Cuernito", "Pan danés tipo hojaldrado con suave sabor a mantequilla. Elaborado con forma de cuerno y barnizado con huevo.", 11.50, "resources/images/cuernito.jpg"));
     }
-
+    public String cerrarSesion() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true";
+    }
     public List<Producto> getProductos() {
         return productos;
     }
