@@ -1,32 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="jakarta.faces.html">
-<ui:composition >
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-   <!-- Sobrescribe los bloques definidos en la plantilla -->
-   <ui:define name="title">
-      Catalogo
-   </ui:define>
+<h:head>
+   <title>Catálogo de productos</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <h:outputStylesheet name="estilos.css" library="css"/>
+</h:head>
 
-   <ui:define name="contenido">
-      <div class="contenido-principal-catalogo">
-         <h1>Catálogo de Productos</h1>
-         <h:panelGroup layout="block" styleClass="productos-grid">
-            <ui:repeat value="#{panaderiaBean.productos}" var="producto">
-               <div class="producto-card">
-                  <h:graphicImage value="#{producto.imagen}" alt="#{producto.nombre}"/>
-                  <h3>#{producto.nombre}</h3>
-                  <p>#{producto.descripcion}</p>
-                  <strong>$#{producto.precio}</strong>
-               </div>
-            </ui:repeat>
-         </h:panelGroup>
-      </div>
+<h:body>
+   <h1>Catálogo de productos</h1>
 
-   </ui:define>
+   <h:form>
+      <h:panelGrid columns="3" columnClasses="col1,col2,col3" styleClass="productos-grid">
+         <ui:repeat value="#{panaderiaBean.productos}" var="producto">
+            <h:panelGroup layout="block" styleClass="producto-card">
 
-</ui:composition>
-<h:commandButton value="Cerrar sesión" action="#{datosSesion}" />
-<h:commandButton value="Agregar al carrito" action="#{carritoBean.agregarItem(
-    item)}" />
+               <h:graphicImage library="images" name="#{producto.nombre}" alt="#{producto.nombre}" styleClass="producto-imagen"/>
+
+               <h3>#{producto.nombre}</h3>
+               <p>#{producto.descripcion}</p>
+               <p><strong>$#{producto.precio}</strong></p>
+
+               <!-- Cantidad a agregar -->
+               <h:inputText value="#{panaderiaBean.productos}" size="2" maxlength="2">
+                  <f:validateLongRange minimum="1"/>
+               </h:inputText>
+
+               <!-- Botón para agregar al carrito -->
+               <h:commandButton value="Agregar al carrito"
+                                action="#{catalogoBean.agregarAlCarrito(producto)}" />
+            </h:panelGroup>
+         </ui:repeat>
+      </h:panelGrid>
+   </h:form>
+
+   <h:link outcome="carrito" value="Ver carrito de compras" style="margin-top:20px; display:block;" />
+</h:body>
 </html>

@@ -1,13 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-<h:commandButton value="Cerrar sesión" action="#{datosSesion.cerrarSesion}" />
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+<h:head>
+    <title>Carrito de compras</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="estilos.css" library="css" />
+</h:head>
+
+<h:body>
+
+    <h1>Tu carrito de compras</h1>
+
+    <h:form id="carritoForm">
+        <h:dataTable value="#{carritoBean.items}" var="item" border="1">
+            <h:column>
+                <f:facet name="header">Producto</f:facet>
+                #{item.nombre}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Precio Unitario</f:facet>
+                $#{item.precio}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cantidad</f:facet>
+                #{item.cantidad}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Subtotal</f:facet>
+                $#{item.subtotal}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Eliminar</f:facet>
+                <h:commandButton value="Eliminar" action="#{carritoBean.eliminarItem(item.productoId)}" />
+            </h:column>
+        </h:dataTable>
+
+        <h:panelGroup layout="block" style="margin-top:20px;">
+            <h:outputText value="Total: $" style="font-weight:bold;" />
+            <h:outputText value="#{carritoBean.total}" style="font-weight:bold;" />
+        </h:panelGroup>
+
+        <br/><br/>
+
+        <h:commandButton value="Confirmar compra" action="#{carritoBean.confirmarCompra}" />
+        <h:commandButton value="Vaciar carrito" action="#{carritoBean.vaciar}" />
+    </h:form>
+
+    <br/>
+    <h:link value="Volver al catálogo" outcome="catalogo" />
+
+
+
+
+<h:commandButton value="Cerrar sesión" action="#{datosSesion.cerrarSesion}" />
+</h:body>
 </html>

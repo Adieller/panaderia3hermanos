@@ -1,52 +1,56 @@
 package mx.ipn.upiita.panaderia3hermanos.web;
+import jakarta.faces.context.FacesContext;
+import mx.ipn.upiita.panaderia3hermanos.web.Producto;
 
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Named;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named("catalogoBean")
 @RequestScoped
 public class PanaderiaBeanCatalogo {
 
-    private int productoId;
-    private String nombre;
-    private BigDecimal precio;
-    private int cantidad;
+    @Resource(lookup = "java:/MyAppDS")
+    private DataSource dataSource;
 
+    private List<Producto> productos;
 
-// Este bean puede ser usado para mostrar productos en el catálogo
-    // o para agregar un producto al carrito (junto con CarritoBean)
+    @PostConstruct
+    public void init() {
+        productos = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT ProdCodProducto, ProdNombre, ProdDescripcion, ProdPrecio FROM Producto";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
 
-    public int getProductoId() {
-        return productoId;
+            while (rs.next()) {
+                int id = rs.getInt("ProdCodProducto");
+                String nombre = rs.getString("ProdNombre");
+                String descripcion = rs.getString("ProdDescripcion");
+                BigDecimal precio = rs.getBigDecimal("ProdPrecio");
+
+                productos.add(new Producto(id, nombre, descripcion, precio));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al cargar el catálogo", null));
+        }
     }
 
-    public void setProductoId(int productoId) {
-        this.productoId = productoId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public List<Producto> getProductos() {
+        return productos;
     }
 }

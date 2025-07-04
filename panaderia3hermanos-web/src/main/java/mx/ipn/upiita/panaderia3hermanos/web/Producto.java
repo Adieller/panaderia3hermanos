@@ -2,28 +2,33 @@ package mx.ipn.upiita.panaderia3hermanos.web;
 
 import jakarta.faces.context.FacesContext;
 
+import java.math.BigDecimal;
+
 public class Producto {
+    private int id;
+
     private String nombre;
     private String descripcion;
-    private double precio;
-    private String imagen;
+    private BigDecimal precio;
+    //private String imagen;
 
-    public Producto(String nombre, String descripcion, double precio, String imagen) {
+    public Producto(int id,String nombre, String descripcion,BigDecimal precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.imagen = imagen;
+        //this.imagen = imagen;
     }
 
+    // Getters necesarios para JSF
+    public int getId() {
+        return id;
+    }
 
-    // Getters y Setters
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNombre() { return nombre; }
     public String getDescripcion() { return descripcion; }
-    public double getPrecio() { return precio; }
-    public String getImagen() { return imagen; }
-
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-    public void setPrecio(double precio) { this.precio = precio; }
-    public void setImagen(String imagen) { this.imagen = imagen; }
+    public BigDecimal getPrecio() { return precio; }
+    //public String getImagen() { return imagen; }
 }

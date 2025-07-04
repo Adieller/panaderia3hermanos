@@ -23,7 +23,7 @@
         <h:panelGroup layout="block" styleClass="productos-container">
             <ui:repeat value="#{panaderiaBean.productos}" var="producto">
                 <div class="producto">
-                    <h:graphicImage value="#{producto.imagen}" alt="#{producto.nombre}" styleClass="producto-img"/>
+                    <h:graphicImage value="#{producto.nombre}" alt="#{producto.nombre}" styleClass="producto-img"/>
                     <h3>#{producto.nombre}</h3>
                     <p>#{producto.descripcion}</p>
                     <strong>$#{producto.precio}</strong>
